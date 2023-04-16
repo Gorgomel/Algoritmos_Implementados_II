@@ -1,16 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "maior_palindromo_bkt.h"
 
-int verifica_palindromo(char *str, int inicio, int fim){
-    for (int i = inicio; i < fim ; i++, fim--) 
-        if (str[i] != str[fim]) 
-            return 0;
-        
-    return 1;
+int verifica_palindromo(const char *str, size_t inicio, size_t fim){
+    int i;
+    for(i = inicio ; i <= fim && (str[i] == str[fim]) ; i++, fim--);
+    return (fim - i <= 1) ? 1 : 0;
 }
 
-char* copia_string(char *str, int inicio, int fim){
+char* copia_string(const char *str, size_t inicio, size_t fim){
     int j = 0;
     
     if((inicio <= fim) && (fim < strlen(str))){
@@ -24,7 +20,7 @@ char* copia_string(char *str, int inicio, int fim){
     return NULL;
 }
 
-char* maior_palin_bkt(char *str, char *maior, int tam, int inicio, int fim){
+char* maior_palin_bkt(const char *str, char *maior, size_t tam, size_t inicio, size_t fim){
     if(inicio >= tam)
         return maior;
         
@@ -34,19 +30,24 @@ char* maior_palin_bkt(char *str, char *maior, int tam, int inicio, int fim){
     else{
         int k;
         char *aux;
+        char *maior1 = maior;
+        char *maior2 = maior;
         
-        for(k = fim ; k >= inicio ; k--)
+        for(k = fim ; k >= inicio ; k--){
             if(verifica_palindromo(str, inicio, k)){
                 aux = copia_string(str, inicio, k);
                 
-                if(strlen(aux) > strlen(maior))
-                    strcpy(maior, aux);
+                if(strlen(aux) > strlen(maior)){
+                    strncpy(maior, aux, (k-inicio+1));
+                    maior[k-inicio+1] = '\0';
+                }
             }
+        }
         
-        char *m1 = maior_palin_bkt(str, maior, tam, inicio + 1, fim);
-        char *m2 = maior_palin_bkt(str, maior, tam, inicio, fim - 1);
+        maior1 = maior_palin_bkt(str, maior, tam, inicio + 1, fim);
+        maior2 = maior_palin_bkt(str, maior, tam, inicio, fim - 1);
         
-        return (m1 > m2) ? m1 : m2;
+        return (strlen(maior1) > strlen(maior2)) ? maior1 : maior2;
     }
 }
 

@@ -1,67 +1,75 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "maior_palindromo_forca_bruta.h"
 
-int verifica_palindromo(char *str, int inicio, int fim){
-    int i;
-    for(i = inicio ; i <= fim && (str[i] == str[fim]) ; i++, fim--);
+int verifica_palindromo(char *str, int i, int fim){
+    
+    for(i = i ; i < fim && (str[i] == str[fim]) ; i++, fim--);
     return (fim - i <= 1) ? 1 : 0;
 }
 
-char* copia_string(char *str, int inicio, int fim){
-    int j = 0;
-    
-    if((inicio <= fim) && (fim < strlen(str))){
-        char *nstr = malloc(sizeof(char)*(fim - inicio + 2));
-        
-        for(int i = inicio ; i <= fim ; i++, j++)
-            nstr[j] = str[i];
-        
-        return nstr;
+char* maior_palindromo(char *str, char *palin, int i, int fim, int *max){
+
+    if(i >= fim)
+        return NULL;
+
+    if(verifica_palindromo(str, i, fim)){
+        int tam_max = fim - i + 1;
+
+        if(tam_max > *max){
+            *max = tam_max;
+
+            strncpy(palin, str +i, tam_max); 
+            palin[tam_max] = '\0';
+            return palin;
+        }
     }
-    return NULL;
+    
+    char *S1 = maior_palindromo(str, palin, i, fim-1, max);
+    char *S2 = maior_palindromo(str, palin, i+1, fim, max);
+    
+    if (S1 != NULL && S2 != NULL)
+        return (strlen(S1) > strlen(S2)) ? S1 : S2;
+    
+    else
+        return (S1 != NULL) ? S1 : S2;
 }
 
-char* maior_palin_bkt(char *str, char *maior, int tam, int inicio, int fim){
-    if(inicio >= tam)
-        return maior;
-        
-    else if(fim <= inicio)
-        return maior; 
+void palindromo(char *str){
     
-    else{
-        int k;
-        char *aux;
+    if(str != NULL){
+        int max = 0;
+        int tam = strlen(str);
+        char *palin = malloc((tam +1) *sizeof(char));
+
+        tam -= 1;
+        if(tam <= 1)
+            if(str[0] == str[tam])
+                printf("%s\n", str);
         
-        for(k = fim ; k >= inicio ; k--)
-            if(verifica_palindromo(str, inicio, k)){
-                aux = copia_string(str, inicio, k);
+        if(verifica_palindromo(str, 0, tam) == 0){
+            char *maior = maior_palindromo(str, palin, 0, tam, &max);
+            
+            if(maior != NULL){
+                if(maior[0] == maior[strlen(maior)-1])
+                    printf("%s\n", maior);
                 
-                if(strlen(aux) > strlen(maior)){
-                    strncpy(maior, aux, (k-inicio+1));
-                    maior[k-inicio+1] = '\0';
-                }
+                else
+                    printf("%c\n", maior[0]);
             }
-        
-        char *m1 = maior_palin_bkt(str, maior, tam, inicio + 1, fim);
-        char *m2 = maior_palin_bkt(str, maior, tam, inicio, fim - 1);
-        
-        return (m1 > m2) ? m1 : m2;
+        }
+
+        else
+            printf("%s\n", str);
     }
 }
 
-int main (){
-    char *str = malloc(sizeof(char));
-    char *maior = malloc(sizeof(char));
+int main(){
+    char *str = malloc(256 *sizeof(char));
     
     scanf("%s", str);
     
-    int tam = strlen(str);
-    
-    printf("%s", maior_palin_bkt(str, maior, tam, 0, tam - 1));
-    
+    palindromo(str);
+
     free(str);
-    free(maior);
     
     return 0;
 }
