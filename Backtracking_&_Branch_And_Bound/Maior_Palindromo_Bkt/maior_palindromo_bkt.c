@@ -3,9 +3,11 @@
 #include <string.h>
 
 int verifica_palindromo(char *str, int inicio, int fim){
-    int i;
-    for(i = inicio ; i <= fim && (str[i] == str[fim]) ; i++, fim--);
-    return (fim - i <= 1) ? 1 : 0;
+    for (int i = inicio; i < fim ; i++, fim--) 
+        if (str[i] != str[fim]) 
+            return 0;
+        
+    return 1;
 }
 
 char* copia_string(char *str, int inicio, int fim){
@@ -37,10 +39,8 @@ char* maior_palin_bkt(char *str, char *maior, int tam, int inicio, int fim){
             if(verifica_palindromo(str, inicio, k)){
                 aux = copia_string(str, inicio, k);
                 
-                if(strlen(aux) > strlen(maior)){
-                    strncpy(maior, aux, (k-inicio+1));
-                    maior[k-inicio+1] = '\0';
-                }
+                if(strlen(aux) > strlen(maior))
+                    strcpy(maior, aux);
             }
         
         char *m1 = maior_palin_bkt(str, maior, tam, inicio + 1, fim);
