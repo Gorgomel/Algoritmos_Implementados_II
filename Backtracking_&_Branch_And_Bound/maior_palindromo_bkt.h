@@ -7,8 +7,8 @@
 
 int verifica_palindromo(const char *str, size_t inicio, size_t fim);
 
-char* copia_string(const char *str, size_t inicio, size_t fim);
+void aux_maior_palin_bkt(const char *str, char *maior, size_t *tam_maior, size_t inicio, size_t fim);
 
-char* maior_palin_bkt(const char *str, char *maior, size_t tam, size_t inicio, size_t fim);
+void maior_palin_bkt(char *str);
 
 #endif

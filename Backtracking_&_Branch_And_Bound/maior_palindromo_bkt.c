@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "maior_palindromo_bkt.h"
 
 int verifica_palindromo(const char *str, size_t inicio, size_t fim){
     int i, j = fim;
