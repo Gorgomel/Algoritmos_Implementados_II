@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
+
+int troco_moedas(int *moedas, int troco, int n);
 
 #endif

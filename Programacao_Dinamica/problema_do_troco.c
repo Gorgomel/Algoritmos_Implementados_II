@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "problema_do_troco.h"
 
 int troco_moedas(int *moedas, int troco, int n){
 
@@ -9,13 +8,12 @@ int troco_moedas(int *moedas, int troco, int n){
     for(i = 0 ; i <= n ; i++)
         mat[0][i] = moedas[0];
 
-    for(i = 1 ; i <= troco ; i++){
+    for(i = 1 ; i <= troco ; i++)
         for(j = 0 ; j < n ; j++){
             x = ((i - moedas[j]) >= 0) ? mat[i - moedas[j]][j] : 0;
             y = (j >= 1) ? mat[i][j - 1] : 0;
             mat[i][j] = x + y;
         }
-    }
 
     return mat[troco][n - 1];
 }
