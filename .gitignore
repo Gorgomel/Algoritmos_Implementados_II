@@ -1,0 +1,19 @@
+#C:\Users\Brunn\OneDrive\Área de Trabalho\2023-1\Algoritmos_Implementados_II\.vscode
+
+# Comentários iniciam com #
+# Ignora todos os arquivos com a extensão .log
+#*.log
+
+# Ignora o diretório "node_modules" e seus arquivos
+#node_modules/
+.vscode/
+.dist/
+
+# Ignora o arquivo .env
+#.env
+
+# Ignora todos os arquivos que começam com "temp"
+#temp*
+
+# Ignora todos os arquivos com a extensão .exe
+#*.exe
