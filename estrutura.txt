@@ -1,0 +1,36 @@
+Algoritmos/
+    Algoritmo_Guloso/
+        Fracao_Egipcia_Adaptado/
+            fracao_egipcia_adaptado.c
+            fracao_egipcia_adaptado.h
+        Tempo_Minimo/
+            tempo_minimo.c
+            tempo_minimo.h
+    Arvore_AVL/
+        nos_nao_folha.c 
+        nos_nao_folha.h
+    Arvore_Rubro_Negra/
+        contar_nos_vermelhos.c 
+        contar_nos_vermelhos.h
+    Arvores_Binarias_de_Busca/ 
+        Remover_nos_Numero_Impar/
+            remover_numero_impar.c
+            remover_numero_impar.h
+        Soma_Nos/
+            soma_nos_nos.c
+            soma_nos_nos.h
+    Backtracking_&_Branch_And_Bound/
+        maior_palindromo_bkt.c
+        maior_palindromo_bkt.h
+    bin/
+    Divisao_e_Conquista/
+        somatoria_em_arranho.c
+        somatoria_em_arranho.h
+    Forca_Bruta/
+        maior_palindromo_forca_bruta.c
+        maior_palindromo_forca_bruta.h
+    Programacao_Dinamica/
+        problema_do_troco.c
+        problema_do_troco.h
+    makefile
+
